@@ -399,7 +399,7 @@ def handle_file_transfer(conn, client_name):
             continue
 
         # Prepare and send file receipt confirmation packet
-        checksum = 0 # cksum.memcrc(file_content)
+        checksum = cksum.memcrc(file_content)
         file_recv_pckt = ResponsePacker.FileReceivedPacker(SERVER_VER, clients_dict[client_name].id, len(file_content), file_name, checksum)
         send_packet(conn, file_recv_pckt.pack())
         packet = recv_packet(conn)
